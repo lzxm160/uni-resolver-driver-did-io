@@ -21,7 +21,7 @@ func NewResponse(marshalledResult string) (*Response, error) {
 
 func (o Response) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 	rw.WriteHeader(200)
-	if err := producer.Produce(rw, o); err != nil {
+	if err := producer.Produce(rw, o.DIDDocument); err != nil {
 		panic(err) // let the recovery middleware deal with this
 	}
 }
