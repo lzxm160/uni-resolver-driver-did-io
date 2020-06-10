@@ -72,7 +72,8 @@ func GetHandler(did string) (ret *Response) {
 		return
 	}
 	ethAddress := common.HexToAddress(hex.EncodeToString(add.Bytes()))
-	ethdid := strings.Join(split[:2], "") + ethAddress.String()
+	split[2] = ethAddress.String()
+	ethdid := strings.Join(split, ":")
 	fmt.Println("ethdid", ethdid)
 	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, gasPrice, gasLimit)
 	if err != nil {
