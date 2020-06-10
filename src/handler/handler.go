@@ -16,7 +16,7 @@ import (
 const (
 	Chainpoint            = "api.testnet.iotex.one:443"
 	IoTeXDIDProxy_address = "io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk"
-	testDID               = `{"@context": "https://w3id.org/did/v1","id": "did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6","authentication": [{"type": "Secp256k1SignatureAuthentication2018","publicKey": ["did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6#owner"]}],"publicKey": [{"id": "did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6#owner","type": "Secp256k1VerificationKey2018","ethereumAddress": "0xe6fe788d8ca214a080b0f6ac7f48480b2aefa9a6","owner": "did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6"},{"id": "did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6#delegate-1","type": "Secp256k1VerificationKey2018","owner": "did:ethr:0xE6Fe788d8ca214A080b0f6aC7F48480b2AEfa9a6","publicKeyHex": "0295dda1dca7f80e308ef60155ddeac00e46b797fd40ef407f422e88d2467a27eb"}]}`
+	testDID               = `{"@context": "https://w3id.org/did/v1","id": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","authentication": [{"type": "Secp256k1SignatureAuthentication2018","publicKey": ["did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner"]}],"publicKey": [{"id": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner","type": "Secp256k1VerificationKey2018","ethereumAddress": "0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","owner": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426"},{"id": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#delegate-1","type": "Secp256k1VerificationKey2018","owner": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","publicKeyHex": "0295dda1dca7f80e308ef60155ddeac00e46b797fd40ef407f422e88d2467a27eb"}]}`
 )
 
 var (
@@ -42,6 +42,7 @@ func GetHandler(did string) (ret *Response) {
 	if len(split) != 3 {
 		return
 	}
+	iotexAddress := split[2]
 	add, err := address.FromString(split[2])
 	if err != nil {
 		return
@@ -59,28 +60,11 @@ func GetHandler(did string) (ret *Response) {
 		return ret
 	}
 	fmt.Println(uri)
-	//fmt.Println("121")
-	//var result string
-	//switch *params.Body.Method {
-	//case getHash:
-	//	result, err = d.GetHash(params.Body.Params[0])
-	//case getURI:
-	//	result, err = d.GetUri(params.Body.Params[0])
-	//default:
-	//	err = errors.New("request invalid method")
-	//}
-	//if err != nil {
-	//	ret, _ := NewResponse(nil, nil, ErrRPCMethodNotFound)
-	//	return ret
-	//}
-	//marshalledResult, err := json.Marshal(result)
-	//if err != nil {
-	//	return nil
-	//}
-	ret, _ = NewResponse(testDID)
+	retFromS3 := getDIDDocument(uri)
+	ret, _ = NewResponse(strings.ReplaceAll(retFromS3, ethAddress.String(), iotexAddress))
 	return ret
 }
 
 func getDIDDocument(uri string) string {
-	return ""
+	return testDID
 }

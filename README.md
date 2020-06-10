@@ -1,7 +1,5 @@
 # uni-resolver-driver-did-iotx
-request example:
-curl -X GET http://127.0.0.1:8080/1.0/identifiers/did:io:io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02
-did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426
+
 ![IoTex Logo](logo/IoTeX.png)
 
 # Universal Resolver Driver: IoTex
@@ -15,6 +13,8 @@ did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426
 ```
 did:io:io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02
 ```
+## Example request:
+curl -X GET http://127.0.0.1:8080/1.0/identifiers/did:io:io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02
 
 ## Build and Run (Docker)
 
