@@ -10,6 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"github.com/iotexproject/uni-resolver-driver-did-io/src/handler"
 	"github.com/iotexproject/uni-resolver-driver-did-io/src/restapi/operations"
 )
 
@@ -33,11 +34,9 @@ func configureAPI(api *operations.ResolverDriverAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.ResolveHandler == nil {
-		api.ResolveHandler = operations.ResolveHandlerFunc(func(params operations.ResolveParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.Resolve has not yet been implemented")
-		})
-	}
+	api.ResolveHandler = operations.ResolveHandlerFunc(func(params operations.ResolveParams) middleware.Responder {
+		return handler.GetHandler(params.Identifier)
+	})
 
 	api.PreServerShutdown = func() {}
 
