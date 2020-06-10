@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/lzxm160/testswagger/contract/IoTeXDID"
+	"github.com/iotexproject/uni-resolver-driver-did-io/contract/IoTeXDID"
 )
 
 const (

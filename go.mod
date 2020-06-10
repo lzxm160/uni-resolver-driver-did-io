@@ -1,4 +1,4 @@
-module github.com/lzxm160/testswagger
+module github.com/iotexproject/uni-resolver-driver-did-io
 
 go 1.13
 
@@ -14,11 +14,9 @@ require (
 	github.com/go-openapi/spec v0.19.8
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/go-openapi/swag v0.19.9
-	github.com/go-openapi/validate v0.19.3
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/huin/goupnp v1.0.0 // indirect
-	github.com/iotexproject/go-pkgs v0.1.1
 	github.com/iotexproject/iotex-address v0.2.1
 	github.com/iotexproject/iotex-antenna-go/v2 v2.3.2
 	github.com/iotexproject/iotex-proto v0.3.0
@@ -27,7 +25,6 @@ require (
 	github.com/karalabe/hid v1.0.0 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/rs/cors v1.7.0 // indirect
-	github.com/stretchr/testify v1.4.0
 	golang.org/x/net v0.0.0-20200528225125-3c3fba18258b
 	gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce // indirect
 	gopkg.in/urfave/cli.v1 v1.20.0 // indirect
