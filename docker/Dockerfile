@@ -1,19 +1,13 @@
-FROM node:10
-MAINTAINER Markus Sabadello <markus@danubetech.com>
+FROM golang:1.13.5-stretch
 
-# build uni-resolver-driver-did-example
+WORKDIR $GOPATH/github.com/iotexproject/uni-resolver-driver-did-io
 
-WORKDIR /usr/src/app
-COPY package.json ./
-RUN npm install
-COPY . .
+RUN mkdir -p $GOPATH/github.com/iotexproject&& \
+    cd $GOPATH/github.com/iotexproject&& \
+    git clone https://github.com/lzxm160/uni-resolver-driver-did-io@driver&& \
+    cd uni-resolver-driver-did-io&& \
+    go mod download&& \
+    go build ./src/cmd/resolver-driver-server&& \
+    cp ./bin/ioctl /usr/local/bin
 
-# variables
-
-ENV uniresolver_driver_did_example_exampleSetting=exampleSetting
-
-# done
-
-EXPOSE 8080
-
-CMD [ "node", "index.js" ]
+CMD [ "resolver-driver-server"]

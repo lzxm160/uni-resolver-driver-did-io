@@ -16,7 +16,7 @@ import (
 const (
 	Chainpoint            = "api.testnet.iotex.one:443"
 	IoTeXDIDProxy_address = "io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk"
-	testDID               = `{"@context": "https://w3id.org/did/v1","id": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","authentication": [{"type": "Secp256k1SignatureAuthentication2018","publicKey": ["did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner"]}],"publicKey": [{"id": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner","type": "Secp256k1VerificationKey2018","ethereumAddress": "0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","owner": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426"},{"id": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#delegate-1","type": "Secp256k1VerificationKey2018","owner": "did:ethr:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","publicKeyHex": "0295dda1dca7f80e308ef60155ddeac00e46b797fd40ef407f422e88d2467a27eb"}]}`
+	testDID               = `{"@context": "https://w3id.org/did/v1","id": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","authentication": [{"type": "Secp256k1SignatureAuthentication2018","publicKey": ["did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner"]}],"publicKey": [{"id": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#owner","type": "Secp256k1VerificationKey2018","ethereumAddress": "0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","owner": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426"},{"id": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426#delegate-1","type": "Secp256k1VerificationKey2018","owner": "did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426","publicKeyHex": "0295dda1dca7f80e308ef60155ddeac00e46b797fd40ef407f422e88d2467a27eb"}]}`
 )
 
 var (
