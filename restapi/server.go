@@ -25,7 +25,7 @@ import (
 	flags "github.com/jessevdk/go-flags"
 	"golang.org/x/net/netutil"
 
-	"github.com/lzxm160/testswagger/restapi/operations"
+	"github.com/iotexproject/uni-resolver-driver-did-io/restapi/operations"
 )
 
 const (

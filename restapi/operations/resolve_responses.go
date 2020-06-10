@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/lzxm160/testswagger/models"
+	"github.com/iotexproject/uni-resolver-driver-did-io/models"
 )
 
 // ResolveOKCode is the HTTP code returned for type ResolveOK
