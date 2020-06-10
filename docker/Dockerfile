@@ -1,5 +1,3 @@
-# Dockerfile for exampleorg/uni-resolver-driver-did-example
-
 FROM node:10
 MAINTAINER Markus Sabadello <markus@danubetech.com>
 
