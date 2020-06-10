@@ -1,10 +1,16 @@
 package handler
 
 import (
+	"encoding/hex"
 	"fmt"
 	"math/big"
 	"os"
 	"strconv"
+	"strings"
+
+	"github.com/ethereum/go-ethereum/common"
+
+	"github.com/iotexproject/iotex-address/address"
 
 	"github.com/iotexproject/uni-resolver-driver-did-io/contract/IoTeXDID"
 )
@@ -54,17 +60,29 @@ func init() {
 	}
 }
 
-func GetHandler(did string) *Response {
-	ret, _ := NewResponse("")
+func GetHandler(did string) (ret *Response) {
+	fmt.Println("did", did)
+	ret, _ = NewResponse("")
+	split := strings.Split(did, ":")
+	if len(split) != 3 {
+		return
+	}
+	add, err := address.FromString(split[2])
+	if err != nil {
+		return
+	}
+	ethAddress := common.HexToAddress(hex.EncodeToString(add.Bytes()))
+	ethdid := strings.Join(split[:2], "") + ethAddress.String()
+	fmt.Println("ethdid", ethdid)
 	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, gasPrice, gasLimit)
 	if err != nil {
 		return ret
 	}
-	result, err := d.GetUri(did)
+	uri, err := d.GetUri(ethdid)
 	if err != nil {
 		return ret
 	}
-	fmt.Println(result)
+	fmt.Println(uri)
 	//fmt.Println("121")
 	//var result string
 	//switch *params.Body.Method {

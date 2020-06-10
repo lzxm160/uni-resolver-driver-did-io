@@ -6,6 +6,8 @@ import (
 	"crypto/tls"
 	"net/http"
 
+	"github.com/iotexproject/uni-resolver-driver-did-io/handler"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
@@ -33,11 +35,9 @@ func configureAPI(api *operations.ResolverDriverAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.ResolveHandler == nil {
-		api.ResolveHandler = operations.ResolveHandlerFunc(func(params operations.ResolveParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.Resolve has not yet been implemented")
-		})
-	}
+	api.ResolveHandler = operations.ResolveHandlerFunc(func(params operations.ResolveParams) middleware.Responder {
+		return handler.GetHandler(params.Identifier)
+	})
 
 	api.PreServerShutdown = func() {}
 
