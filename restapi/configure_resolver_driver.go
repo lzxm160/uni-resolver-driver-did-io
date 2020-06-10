@@ -10,7 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"github.com/lzxm160/testswagger/restapi/operations"
+	"github.com/iotexproject/uni-resolver-driver-did-io/restapi/operations"
 )
 
 //go:generate swagger generate server --target ../../uni-resolver-driver-did-io --name ResolverDriver --spec ../swagger.yml
