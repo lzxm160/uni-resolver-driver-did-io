@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math/big"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -40,24 +39,6 @@ func init() {
 	if DIDAddress == "" {
 		DIDAddress = IoTeXDIDProxy_address
 	}
-	gasPriceString := os.Getenv("GASPRICE")
-	if gasPriceString == "" {
-		gasPriceString = GasPrice
-	}
-	var ok bool
-	gasPrice, ok = new(big.Int).SetString(gasPriceString, 10)
-	if !ok {
-		fmt.Println("gas price convert error")
-	}
-	gasLimitString := os.Getenv("GASLIMIT")
-	if gasLimitString == "" {
-		gasLimitString = GasLimit
-	}
-	var err error
-	gasLimit, err = strconv.ParseUint(gasLimitString, 10, 64)
-	if err != nil {
-		fmt.Println("gas limit convert error", err)
-	}
 }
 
 func GetHandler(did string) (ret *Response) {
@@ -75,7 +56,7 @@ func GetHandler(did string) (ret *Response) {
 	split[2] = ethAddress.String()
 	ethdid := strings.Join(split, ":")
 	fmt.Println("ethdid", ethdid)
-	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, gasPrice, gasLimit)
+	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, nil, 0)
 	if err != nil {
 		return ret
 	}
@@ -104,4 +85,8 @@ func GetHandler(did string) (ret *Response) {
 	//}
 	ret, _ = NewResponse(testDID)
 	return ret
+}
+
+func getDIDDocument(uri string) string {
+	return ""
 }
