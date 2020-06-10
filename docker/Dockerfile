@@ -8,6 +8,6 @@ RUN mkdir -p $GOPATH/github.com/iotexproject&& \
     cd uni-resolver-driver-did-io&& \
     go mod download&& \
     go build ./src/cmd/resolver-driver-server&& \
-    cp ./bin/ioctl /usr/local/bin
+    cp resolver-driver-server /usr/local/bin
 
 CMD [ "resolver-driver-server"]
