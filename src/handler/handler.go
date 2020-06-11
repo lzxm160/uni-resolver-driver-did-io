@@ -40,7 +40,7 @@ func GetHandler(did string) (ret *Response) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(uri)
+	fmt.Println("uri", uri)
 	ret, _ = NewResponse(getDIDDocument(testURI))
 	return ret
 }
