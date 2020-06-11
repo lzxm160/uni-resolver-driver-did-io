@@ -18,11 +18,11 @@ var (
 )
 
 func init() {
-	chainpoint = os.Getenv("CHAINPOINT")
+	chainpoint = os.Getenv("uniresolver_driver_did_io_IoTexConnections")
 	if chainpoint == "" {
 		panic("please set chainpoint through CHAINPOINT env")
 	}
-	DIDAddress = os.Getenv("IoTeXDIDPROXYADDRESS")
+	DIDAddress = os.Getenv("uniresolver_driver_did_io_IoTexContract")
 	if DIDAddress == "" {
 		panic("please set contract address through IoTeXDIDPROXYADDRESS env")
 	}
