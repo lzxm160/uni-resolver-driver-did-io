@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -11,10 +10,6 @@ import (
 	"github.com/iotexproject/uni-resolver-driver-did-io/src/contract/IoTeXDID"
 	"github.com/iotexproject/uni-resolver-driver-did-io/src/models"
 	"github.com/iotexproject/uni-resolver-driver-did-io/src/restapi/operations"
-)
-
-const (
-	testURI = "https://did-io-test.s3.ap-southeast-1.amazonaws.com/ddo-test.json"
 )
 
 var (
@@ -42,8 +37,7 @@ func GetHandler(did string) (ret middleware.Responder) {
 	if err != nil {
 		return operations.NewResolveInternalServerError()
 	}
-	fmt.Println("uri", uri)
-	return getDIDDocument(testURI)
+	return getDIDDocument(uri)
 }
 
 func getDIDDocument(uri string) middleware.Responder {
@@ -58,7 +52,7 @@ func getDIDDocument(uri string) middleware.Responder {
 	}
 	r := operations.NewResolveOK()
 	r.SetPayload([]*models.ResolutionResult{
-		&models.ResolutionResult{DidDocument: string(s)},
+		{DidDocument: string(s)},
 	})
 	return r
 }

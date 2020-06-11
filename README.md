@@ -11,21 +11,21 @@
 ## Example DIDs
 
 ```
-did:io:io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02
+did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426
 ```
 ## Example request:
-curl -X GET http://127.0.0.1:8080/1.0/identifiers/did:io:io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02
+curl -X GET http://127.0.0.1:8080/1.0/identifiers/did:io:0x0ddfC506136fb7c050Cc2E9511eccD81b15e7426
 
 ## Build and Run (Docker)
 please change CHAINPOINT and IoTeXDIDPROXYADDRESS to the real endpoint and contract address
 ```
-docker build -f ./docker/Dockerfile . -t iotexproject/resolver
-docker run -p 8080:8080 -e "HOST=0.0.0.0" -e "PORT=8080" -e "CHAINPOINT=api.testnet.iotex.one:443" -e "IoTeXDIDPROXYADDRESS=io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk" iotexproject/resolver
+docker build -f ./docker/Dockerfile . -t iotexproject/uni-resolver-driver-did-iotx
+docker run -p 8080:8080 -e "HOST=0.0.0.0" -e "PORT=8080" -e "CHAINPOINT=api.testnet.iotex.one:443" -e "IoTeXDIDPROXYADDRESS=io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk" iotexproject/uni-resolver-driver-did-iotx
 
 ```
 
 ## Build and Run
-please change CHAINPOINT and IoTeXDIDPROXYADDRESS to the real endpoint and contract address
+please modify buildAndRun.sh to change CHAINPOINT and IoTeXDIDPROXYADDRESS to the real endpoint and contract address
 ```
 ./buildAndRun.sh
 ```
