@@ -37,6 +37,7 @@ func GetHandler(did string) (ret *Response) {
 		fmt.Println("NewDID", err)
 		panic(err)
 	}
+	fmt.Println("NewDID pass")
 	uri, err := d.GetUri(did)
 	if err != nil {
 		fmt.Println("GetUri", err)
