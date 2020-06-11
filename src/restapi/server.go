@@ -76,8 +76,8 @@ type Server struct {
 	SocketPath    flags.Filename `long:"socket-path" description:"the unix socket to listen on" default:"/var/run/resolver-driver.sock"`
 	domainSocketL net.Listener
 
-	Host         string        `long:"host" description:"the IP to listen on" default:"localhost" env:"HOST"`
-	Port         int           `long:"port" description:"the port to listen on for insecure connections, defaults to a random value" env:"PORT"`
+	Host         string        `long:"host" description:"the IP to listen on" default:"0.0.0.0" env:"HOST"`
+	Port         int           `long:"port" description:"the port to listen on for insecure connections, defaults to a random value" default:8080 env:"PORT"`
 	ListenLimit  int           `long:"listen-limit" description:"limit the number of outstanding requests"`
 	KeepAlive    time.Duration `long:"keep-alive" description:"sets the TCP keep-alive timeouts on accepted connections. It prunes dead TCP connections ( e.g. closing laptop mid-download)" default:"3m"`
 	ReadTimeout  time.Duration `long:"read-timeout" description:"maximum duration before timing out read of the request" default:"30s"`
