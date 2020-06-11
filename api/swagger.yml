@@ -1,5 +1,5 @@
----
 swagger: '2.0'
+host: 0.0.0.0:8080
 info:
   description: IoTex Resolver Driver
   version: "1.0.0"
