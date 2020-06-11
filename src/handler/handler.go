@@ -6,7 +6,11 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-openapi/runtime/middleware"
+
 	"github.com/iotexproject/uni-resolver-driver-did-io/src/contract/IoTeXDID"
+	"github.com/iotexproject/uni-resolver-driver-did-io/src/models"
+	"github.com/iotexproject/uni-resolver-driver-did-io/src/restapi/operations"
 )
 
 const (
@@ -29,36 +33,32 @@ func init() {
 	}
 }
 
-func GetHandler(did string) (ret *Response) {
-	fmt.Println("did", did)
-	ret = NewResponse("")
+func GetHandler(did string) (ret middleware.Responder) {
 	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, nil, 0)
 	if err != nil {
-		fmt.Println("NewDID", err)
-		panic(err)
+		return operations.NewResolveInternalServerError()
 	}
-	fmt.Println("NewDID pass")
 	uri, err := d.GetUri(did)
 	if err != nil {
-		fmt.Println("GetUri", err)
-		panic(err)
+		return operations.NewResolveInternalServerError()
 	}
 	fmt.Println("uri", uri)
-	ret = NewResponse(getDIDDocument(testURI))
-	return ret
+	return getDIDDocument(testURI)
 }
 
-func getDIDDocument(uri string) string {
+func getDIDDocument(uri string) middleware.Responder {
 	resp, err := http.Get(uri)
 	if err != nil {
-		fmt.Println("http.Get", err)
-		panic(err)
+		return operations.NewResolveInternalServerError()
 	}
 	defer resp.Body.Close()
 	s, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("ioutil.ReadAll", err)
-		panic(err)
+		return operations.NewResolveInternalServerError()
 	}
-	return string(s)
+	r := operations.NewResolveOK()
+	r.SetPayload([]*models.ResolutionResult{
+		&models.ResolutionResult{DidDocument: string(s)},
+	})
+	return r
 }
