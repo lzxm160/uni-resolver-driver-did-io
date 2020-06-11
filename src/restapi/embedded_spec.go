@@ -27,6 +27,7 @@ func init() {
     },
     "version": "1.0.0"
   },
+  "host": "0.0.0.0:8080",
   "paths": {
     "/1.0/identifiers/{identifier}": {
       "get": {
@@ -90,6 +91,7 @@ func init() {
     },
     "version": "1.0.0"
   },
+  "host": "0.0.0.0:8080",
   "paths": {
     "/1.0/identifiers/{identifier}": {
       "get": {
