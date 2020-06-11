@@ -34,8 +34,8 @@ please modify buildAndRun.sh to change CHAINPOINT and IoTeXDIDPROXYADDRESS to th
 
 The driver need to set the following environment variables:
 
-HOST=0.0.0.0
-PORT=8080
+HOST=0.0.0.0 default 0.0.0.0
+PORT=8080 default 8080
 CHAINPOINT=api.testnet.iotex.one:443
 IoTeXDIDPROXYADDRESS=io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk
 
