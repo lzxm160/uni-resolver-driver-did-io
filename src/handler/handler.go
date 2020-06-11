@@ -31,7 +31,7 @@ func init() {
 
 func GetHandler(did string) (ret *Response) {
 	fmt.Println("did", did)
-	ret, _ = NewResponse("")
+	ret = NewResponse("")
 	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, nil, 0)
 	if err != nil {
 		fmt.Println("NewDID", err)
@@ -44,7 +44,7 @@ func GetHandler(did string) (ret *Response) {
 		panic(err)
 	}
 	fmt.Println("uri", uri)
-	ret, _ = NewResponse(getDIDDocument(testURI))
+	ret = NewResponse(getDIDDocument(testURI))
 	return ret
 }
 

@@ -13,10 +13,10 @@ type Response struct {
 	DIDDocument string `json:"DIDDocument"`
 }
 
-func NewResponse(marshalledResult string) (*Response, error) {
+func NewResponse(marshalledResult string) *Response {
 	return &Response{
 		DIDDocument: marshalledResult,
-	}, nil
+	}
 }
 
 func (o Response) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
