@@ -2,11 +2,16 @@ package handler
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/hex"
 	"errors"
-	"fmt"
 	"math/big"
 	"strings"
+	"time"
+
+	grpc_retry "github.com/grpc-ecosystem/go-grpc-middleware/retry"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/iotexproject/iotex-address/address"
@@ -68,7 +73,7 @@ func (d *did) CreateDID(id, didHash, url string) (hash string, err error) {
 		err = errors.New("hash should be 32 bytes")
 		return
 	}
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -87,7 +92,7 @@ func (d *did) CreateDID(id, didHash, url string) (hash string, err error) {
 }
 
 func (d *did) DeleteDID(did string) (hash string, err error) {
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -102,7 +107,7 @@ func (d *did) DeleteDID(did string) (hash string, err error) {
 }
 
 func (d *did) UpdateHash(did, didHash string) (hash string, err error) {
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -121,7 +126,7 @@ func (d *did) UpdateHash(did, didHash string) (hash string, err error) {
 }
 
 func (d *did) UpdateUri(did, uri string) (hash string, err error) {
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -136,8 +141,7 @@ func (d *did) UpdateUri(did, uri string) (hash string, err error) {
 }
 
 func (d *did) GetHash(did string) (hash string, err error) {
-	fmt.Println("GetHash")
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -157,7 +161,7 @@ func (d *did) GetHash(did string) (hash string, err error) {
 }
 
 func (d *did) GetUri(did string) (uri string, err error) {
-	conn, err := iotex.NewDefaultGRPCConn(d.endpoint)
+	conn, err := newDefaultGRPCConn(d.endpoint)
 	if err != nil {
 		return
 	}
@@ -172,4 +176,15 @@ func (d *did) GetUri(did string) (uri string, err error) {
 		return
 	}
 	return
+}
+
+func newDefaultGRPCConn(endpoint string) (*grpc.ClientConn, error) {
+	opts := []grpc_retry.CallOption{
+		grpc_retry.WithBackoff(grpc_retry.BackoffLinear(10 * time.Second)),
+		grpc_retry.WithMax(1),
+	}
+	return grpc.Dial(endpoint,
+		grpc.WithStreamInterceptor(grpc_retry.StreamClientInterceptor(opts...)),
+		grpc.WithUnaryInterceptor(grpc_retry.UnaryClientInterceptor(opts...)),
+		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 }
