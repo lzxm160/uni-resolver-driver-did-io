@@ -43,7 +43,7 @@ type did struct {
 }
 
 func NewDID(endpoint, privateKey, contract, abiString string, gasPrice *big.Int, gasLimit uint64) (d DID, err error) {
-	abi, err := abi.JSON(strings.NewReader(abiString)) // note,this is IoTeXDID_abi
+	abi, err := abi.JSON(strings.NewReader(abiString))
 	if err != nil {
 		return
 	}

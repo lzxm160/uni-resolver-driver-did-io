@@ -34,10 +34,12 @@ func GetHandler(did string) (ret *Response) {
 	ret, _ = NewResponse("")
 	d, err := NewDID(chainpoint, "", DIDAddress, IoTeXDID.IoTeXDIDABI, nil, 0)
 	if err != nil {
+		fmt.Println("NewDID", err)
 		panic(err)
 	}
 	uri, err := d.GetUri(did)
 	if err != nil {
+		fmt.Println("GetUri", err)
 		panic(err)
 	}
 	fmt.Println("uri", uri)
@@ -48,11 +50,13 @@ func GetHandler(did string) (ret *Response) {
 func getDIDDocument(uri string) string {
 	resp, err := http.Get(uri)
 	if err != nil {
+		fmt.Println("http.Get", err)
 		panic(err)
 	}
 	defer resp.Body.Close()
 	s, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		fmt.Println("ioutil.ReadAll", err)
 		panic(err)
 	}
 	return string(s)
