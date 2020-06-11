@@ -24,6 +24,7 @@ require (
 	github.com/iotexproject/iotex-proto v0.3.0
 	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
 	github.com/jessevdk/go-flags v1.4.0
+	github.com/karalabe/hid v1.0.0 // indirect
 	github.com/karalabe/usb v0.0.0-20191104083709-911d15fe12a9 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
