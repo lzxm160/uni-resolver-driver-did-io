@@ -21,7 +21,6 @@ please change uniresolver_driver_did_io_IoTexConnections and uniresolver_driver_
 ```
 docker build -f ./docker/Dockerfile . -t iotexproject/uni-resolver-driver-did-iotx
 docker run -p 8080:8080 -e "HOST=0.0.0.0" -e "PORT=8080" -e "uniresolver_driver_did_io_IoTexConnections=api.testnet.iotex.one:443" -e "uniresolver_driver_did_io_IoTexContract=io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk" iotexproject/uni-resolver-driver-did-iotx
-
 ```
 
 ## Build and Run
@@ -33,11 +32,11 @@ please modify buildAndRun.sh to change uniresolver_driver_did_io_IoTexConnection
 ## Driver Environment Variables
 
 The driver need to set the following environment variables:
-
+```
 HOST=0.0.0.0 default 0.0.0.0
 PORT=8080 default 8080
 uniresolver_driver_did_io_IoTexConnections=api.testnet.iotex.one:443
 uniresolver_driver_did_io_IoTexContract=io1j2af3s4f7qjk8eudzx6a6kdhekr7zt2k5y5qlk
-
+```
 ## License
 This project is licensed under the [Apache License 2.0](LICENSE).
